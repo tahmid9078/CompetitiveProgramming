@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	string s;
+	map<char, char> m;
+	m['A'] = 'A';
+	m['H'] = 'H';
+	m['I'] = 'I';
+	m['E'] = '3';
+	m['J'] = 'L';
+	m['L'] = 'J';
+	m['M'] = 'M';
+	m['O'] = 'O';
+	m['T'] = 'T';
+	m['U'] = 'U';
+	m['V'] = 'V';
+	m['W'] = 'W';
+	m['X'] = 'X';
+	m['S'] = '2';
+	m['Y'] = 'Y';
+	m['Z'] = '5';
+	m['1'] = '1';
+	m['2'] = 'S';
+	m['3'] = 'E';
+	m['5'] = 'Z';
+	m['8'] = '8';
+	
+	bool palin, mirror;
+	while(cin >> s){
+		int len=s.length();
+		palin=mirror=true;
+		for(int i=0; i<=len/2; i++){
+			if(s[i]!=s[len-1-i]) palin=false;
+			if(s[i]!=m[s[len-1-i]]) mirror=false;
+		}
+		
+		if(palin && mirror) cout<<s<<" -- is a mirrored palindrome.\n\n";
+		else if(palin && !mirror) cout<<s<<" -- is a regular palindrome.\n\n";
+        else if(!palin && mirror) cout<<s<<" -- is a mirrored string.\n\n";
+        else cout<<s<<" -- is not a palindrome.\n\n";
+		
+	}
+	return 0;
+}

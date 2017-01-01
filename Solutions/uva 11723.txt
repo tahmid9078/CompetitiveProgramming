@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+
+int main() {
+	
+	int n,r,diff,b;
+	int t=1;
+	while(scanf("%d %d", &r ,&n)==2){
+		if(n==0 && r==0){
+			break;
+		}
+		if(n>=r){
+			printf("Case %d: 0\n",t++);
+		}
+		else if(n*26+n<r){
+			printf("Case %d: impossible\n",t++);
+		}
+		else{
+			diff=r-n;
+			b=ceil(diff/(double)n);
+			printf("Case %d: %d\n",t++, b);
+		}
+	}
+	return 0;
+}

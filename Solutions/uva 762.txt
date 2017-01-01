@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<string, vector<string>> graph;
+map<string, int> visited;
+map<string, string> parent;
+
+int bfs(string s, string e){
+	queue<string> q;
+	q.push(s);
+	visited[s]=0;
+	while(!q.empty()){
+		string u=q.front(); q.pop();
+		if(u==e){
+			return visited[u];
+		}
+		for(int i=0; i<graph[u].size(); i++){
+			string v=graph[u][i];
+			if(visited[v]==-1){
+				visited[v]=visited[u]+1;
+				parent[v]=u;
+				q.push(v);
+			}
+		}
+	}
+	return -1;
+}
+void printpath(string b, string e){
+	if(e==b) return;
+	else{
+		printpath(b,parent[e]);
+		cout << parent[e] << " "<< e<< endl;
+	}
+}
+int main() {
+	int n;
+	bool flag=false;
+	string s1, s2, beg, end;
+	while(scanf("%d", &n)!=EOF){
+		
+		for(int i=0; i<n; i++){
+			cin>> s1>>s2;
+			graph[s1].push_back(s2);
+			graph[s2].push_back(s1);
+			visited[s1]=-1;
+			visited[s2]=-1;
+		}
+		cin >> beg >> end;
+		int ans=bfs(beg, end);
+		
+		if(flag) printf("\n");
+		flag=true;
+		if(ans==-1){
+			printf("No route\n");
+		}
+		else{
+			printpath(beg,end);
+		}
+		graph.clear();
+		visited.clear();
+		parent.clear();
+	}
+	
+	return 0;
+}

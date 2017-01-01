@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct in{
+	int x;
+	string y;
+};
+bool cmp(in a, in b){
+	if(a.x<b.x) return true;
+	return false;
+}
+int main() {
+	in ar[10005];
+	int t,v;
+	string d;
+	string s;
+	bool blank=false;
+	stringstream ss;
+	scanf("%d", &t);
+	getchar();
+	while(t--){
+		getline(cin,s);
+		getline(cin,s);
+	//	cout<<s<<endl;
+		ss<< s;
+		int n=0;
+		while(ss>>v){
+			ar[n].x=v;
+			n++;
+		}
+		ss.clear();
+		getline(cin,s);
+	//	cout<<s<<endl;
+		ss<<s;
+		n=0;
+		while(ss>>d){
+			ar[n].y=d;
+			n++;
+		}
+		ss.clear();
+		sort(ar,ar+n,cmp);
+		if(blank) printf("\n");
+        blank=true;
+ 		for(int i=0; i<n; i++)
+            cout << ar[i].y << endl;
+	}
+	return 0;
+}

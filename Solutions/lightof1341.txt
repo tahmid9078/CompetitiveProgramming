@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Size 1000005 
+    bool mark[Size];
+    vector<long long> prime;
+    void seive(){
+    	memset(mark,true,sizeof(mark));
+    	mark[0]=mark[1]=false;
+    	for(long long i=4; i<Size; i+=2) mark[i]=false;
+     
+    	for(long long i=3; i*i<=Size; i+=2){
+    		if(mark[i]){
+    			for(long long j=i*i; j<Size; j+=2*i){
+    				mark[j]=false;
+    			}
+    		}
+    	}
+     
+    	prime.push_back(2);
+    	for(long long i=3; i<Size; i+=2){
+    		if(mark[i]){
+    			prime.push_back(i);
+    		}
+    	}
+    }
+    long long Find_divisor(long long num){
+     
+    	long long sum=1, cnt,sz=prime.size();
+    	for(long long i=0; i<sz && prime[i]*prime[i]<=num; i++){
+    		cnt=0;
+    		if(num%prime[i]==0){
+    			while(num%prime[i]==0){
+    				cnt++;
+    				num=num/prime[i];
+    			}
+    			sum=sum*(cnt+1);
+    		}
+    	}
+    	if(num>1){
+    		sum=sum*2;
+    	}
+     	
+    	return sum;
+    }
+    int main() {
+    	seive();
+    	int t, tcase=1;
+    	long long area, MIN;
+    	scanf("%d", &t);
+    	while(t--){
+    		scanf("%lld %lld", &area, &MIN);
+    		int sqr=sqrt(area);
+    		if(sqr<MIN){
+    			printf("Case %d: 0\n",tcase++);
+    			continue;
+    		}
+    		long long ans=Find_divisor(area)/2;
+    		for(int i=1; i<MIN; i++){
+    			if(area%i==0)ans--;
+    		}
+    		printf("Case %d: %lld\n",tcase++, ans);
+    	}
+    	return 0;
+    }

@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+
+const int MAX = 2000+10;
+const int INF = 0x3f3f3f3f;
+
+struct edges{
+    int u;
+    int v;
+    int w;
+};
+edges graph[MAX];
+int dist[1010];
+
+int V,E;
+
+bool bellman_ford(){
+
+    memset(dist, INF, sizeof(dist));
+    dist[0]=0;
+    for(int i=0; i<V-1; i++){
+        for(int j=0; j<E; j++){
+            int u=graph[j].u;
+            int v=graph[j].v;
+            int w=graph[j].w;
+            if (dist[u] != INF && dist[u]+w<dist[v]){
+                dist[v]=dist[u]+w;
+            }
+        }
+    }
+    
+    for(int j=0; j<E; j++){
+        int u=graph[j].u;
+        int v=graph[j].v;
+        int w=graph[j].w;
+        if (dist[u]+w<dist[v]){
+                return true;
+        }
+    }
+    return false;
+}
+
+int main(){
+
+    int t,u,v,w;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d", &V, &E);
+        for(int i=0; i<E; i++){
+            scanf("%d %d %d", &graph[i].u, &graph[i].v, &graph[i].w);
+        }
+        if(bellman_ford()){
+            printf("possible\n");
+        }
+        else{
+            printf("not possible\n");
+        }
+    }
+return 0;
+}

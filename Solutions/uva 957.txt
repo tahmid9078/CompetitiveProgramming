@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int y,p;
+	while(scanf ("%d", &y)!=EOF){
+        scanf ("%d", &p);
+        int ar[p];
+        for(int i=0; i<p; i++)
+        	scanf("%d", &ar[i]);
+        int cnt=0;
+        int j,f,l;
+        int Max=-10;
+		for (int i=0; i<p; i++){
+            j=i;
+            cnt=0;
+            while (ar[j]<=ar[i]+y-1){
+                j++;
+                cnt++;
+            }
+            if(cnt>Max){
+                Max=cnt;
+                f=ar[i];
+                l= ar[j-1];
+            }
+        }
+        printf("%d %d %d\n", Max, f, l);
+    }
+	
+	return 0;
+}

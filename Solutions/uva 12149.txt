@@ -1,0 +1,22 @@
+#include iostream
+using namespace std;
+
+int main() {
+	
+	int n, temp=0;
+	while(true){
+		
+		scanf(%d, &n);
+		if(n==0){
+			break;
+		}
+		temp=0;
+		for(int i=n ; i=1 ; i--){
+			
+			temp=temp+(ii);
+		}
+		
+		printf(%dn , temp);
+	}
+	return 0;
+}

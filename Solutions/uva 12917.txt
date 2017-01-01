@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int p,h,o,n;
+	while(scanf("%d %d %d",&p,&h,&o)==3){
+		if(p<=(o-h))
+			cout<<"Props win!"<<endl;
+		else
+			cout<<"Hunters win!"<<endl;
+	}
+	return 0;
+}

@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<string, vector<string>> graph;
+map<string, int> visited;
+
+int bfs(string s, string e){
+	queue<string> q;
+	q.push(s);
+	visited[s]=0;
+	while(!q.empty()){
+		string u=q.front(); q.pop();
+		if(u==e){
+			return visited[u];
+		}
+		for(int i=0; i<graph[u].size(); i++){
+			string v=graph[u][i];
+			if(visited[v]==-1){
+				visited[v]=visited[u]+1;
+				q.push(v);
+			}
+		}
+	}
+	return -1;
+}
+int main() {
+	int t;
+	string word,line,beg,end;
+	string ar[2];
+	scanf("%d", &t);
+	while(t--){
+		graph.clear();
+		cin>> word;
+		while(word!="*"){
+			graph[word];
+			visited[word]=-1;
+			map<string, vector<string> >::const_iterator it;
+			for(it = graph.begin(); it!=graph.end(); it++){
+				string tmp=(*it).first;
+				int tmpsize=tmp.size();
+				int dif=0;
+				if(tmpsize==word.size()){
+					for(int i=0; i<tmpsize && dif <2 ; i++){
+						if(word[i]!=tmp[i]) dif++;
+					}
+					if(dif==1){
+						graph[tmp].push_back(word);
+						graph[word].push_back(tmp);
+					}
+				}
+			}
+			cin >> word;
+ 
+		}
+		getline(cin, line);
+		getline(cin, line);
+		while(line != ""){
+			stringstream ss(line);
+			string tok;
+			int i=0;
+			while(ss>>tok){
+				ar[i]=tok;
+				i++;
+			}
+			
+			map<string, int >::const_iterator it;
+			for(it = visited.begin(); it!=visited.end(); it++){
+				string tmp=(*it).first;
+				visited[tmp]=-1;
+			}
+			cout<< ar[0] << " "<< ar[1]<< " "<< bfs(ar[0],ar[1]) << endl;
+			if(!getline(cin,line)) break;
+		}
+		if(t!=0) printf("\n");
+		
+	}
+	return 0;
+}

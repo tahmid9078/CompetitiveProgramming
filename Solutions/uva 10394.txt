@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Size 20000000
+typedef long long int ll;
+
+bool mark[Size];
+//vector<ll> prime;
+vector<pair<ll,ll>>primePair;
+void seive(){
+	memset(mark,true,sizeof(mark));
+	mark[0]=mark[1]=false;
+	for(ll i=4; i<Size; i+=2) mark[i]=false;
+	for(ll i=3; i*i<=Size; i+=2){
+		if(mark[i]){
+			for(ll j=i*i; j<Size; j+=2*i){
+				mark[j]=false;
+			}
+		}
+	}
+	for(ll i=3; i<Size-2; i+=2){
+		if(mark[i]){
+			if(mark[i+2]){
+				primePair.push_back(std::make_pair(i,i+2));
+			}
+		}
+	}
+}
+int main() {
+ 	seive();
+ 	ll n;
+ 	while(scanf("%lld", &n)==1){
+ 		printf("(%lld, %lld)\n",primePair[n-1].first,primePair[n-1].second);
+ 	}
+	return 0;
+}

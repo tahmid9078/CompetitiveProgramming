@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+ using namespace std;
+
+int main (){
+	string line;
+	int letters[125];
+	while(getline(cin, line)){
+		for(int i=0; i<125; i++) letters[i]=0;
+		int len=line.length();
+		for(int i=0; i<len; i++){
+			if((line[i]>='A' && line[i]<='Z') || (line[i]>='a' && line[i]<='z')){
+				int idx=line[i];
+				letters[idx]++;
+			}
+		}
+		int Max=-10;
+		for(int i=0; i<125; i++){
+			if(letters[i]>Max) Max=letters[i];
+		}
+		for(int i=0; i<125; i++){
+			if((i>=65 && i<=90) || (i>=97 && i<=122)){
+				if(letters[i]==Max){
+					printf("%c", i);
+				}
+			}
+		}
+		printf(" %d\n",Max);
+	}
+    return 0;
+}

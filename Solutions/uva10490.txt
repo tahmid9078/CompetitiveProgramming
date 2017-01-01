@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int prime[]={2,3,5,7,11,13,17,19,23,29,31};
+int main() {
+	int n,pflag;
+	long long sum;
+	while(scanf("%d", &n)==1){
+		if(n==0)break;
+		pflag=0;
+		for(int i=0; i<11; i++){
+			if(n==prime[i]){
+				pflag=1;
+				break;
+			}
+		}
+		if(pflag==1){
+			if(n==11 || n==23 || n==29){
+				printf("Given number is prime. But, NO perfect number is available.\n");
+			}
+			else{
+				sum=pow(2,n-1) * (pow (2,n)-1);
+				printf("Perfect: %lld!\n", sum);
+			}
+		}
+		else{
+			printf("Given number is NOT prime! NO perfect number is available.\n");
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 100010
+typedef long long int ll;
+int divisor[MAX];
+ll sumOfDiv[MAX];
+void cal(){
+	divisor[1]=1;
+    sumOfDiv[1]=1;
+    for(int i=2; i<MAX; i++){
+        divisor[i]=2;
+        sumOfDiv[i]=1+i;
+        int sq=sqrt(i);
+        for(int j=2; j<=sq; j++){
+            if(i%j==0){
+                divisor[i]+=2;
+                sumOfDiv[i]+=j+i/j;
+            }
+        }
+        if(sq*sq==i){
+            divisor[i]--;
+            sumOfDiv[i]-=sq;
+            }
+        
+    }
+}
+
+int main() {  
+    int t;
+    int a,b,k;
+    cal();
+    scanf("%d", &t);
+    while (t--){
+    	scanf("%d %d %d", &a, &b, &k);
+    	ll g=0, h=0;
+    	int st=ceil(a/(double)k);
+    	st=st*k;
+    	while(st<=b){
+    		g+=divisor[st];
+    		h+=sumOfDiv[st];
+    		st+=k;
+    	}
+    	printf("%lld %lld\n",g,h);
+    }
+    return 0;
+}

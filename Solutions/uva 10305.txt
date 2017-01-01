@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef vector<int> vi;
+
+vi graph[105];
+vi color;
+vi toposort;
+
+void dfs(int u){
+
+    color[u]=1;
+    for(int j=0; j<graph[u].size(); j++){
+        if(color[graph[u][j]]==0){
+            dfs(graph[u][j]);
+        }
+    }
+    toposort.push_back(u);
+}
+
+int main(){
+    int v,e,v1,v2;
+    while(true){
+        scanf("%d %d", &v, &e);
+        if(v==0 && e==0)break;
+        color.assign(v+1,0);
+        for(int i=1; i<=e; i++){
+            scanf("%d %d", &v1, &v2);
+            graph[v1].push_back(v2);
+        }
+
+        for(int i=1; i<=v; i++){
+            if(color[i] == 0){
+                dfs(i);
+            }
+        }
+        reverse(toposort.begin(), toposort.end());
+        for(int i=0; i<toposort.size(); i++)
+        {
+            if(i<toposort.size() - 1)
+                printf("%d ", toposort[i]);
+            else
+                printf("%d\n", toposort[i]);
+        }
+        toposort.clear();
+        for(int i=1; i<=v; i++){
+            graph[i].clear();
+        }
+    }
+
+return 0;
+}

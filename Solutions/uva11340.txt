@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    int t;
+    int nolet,noline,len;
+    double dol;
+    pair<char,double> p[105];
+    char line[10010];
+    scanf("%d", &t);
+    while(t--){
+        scanf("%d", &nolet);
+        for(int i=0; i<nolet; i++){
+        	scanf("\n");
+            scanf("%c %lf", &p[i].first, &p[i].second);
+       //     printf("%c %lf\n", p[i].first, p[i].second);
+        }
+        scanf("%d", &noline);
+      //  printf("%d", noline);
+        scanf("\n");
+        dol=0;
+        for(int i=0; i<noline; i++){
+            cin.getline(line, sizeof(line));
+            len=strlen(line);
+            for(int j=0; j<len; j++){
+                for(int k=0; k<nolet; k++){
+                    if(line[j]==p[k].first){
+                        dol+=p[k].second;
+                    }
+                }
+            }
+        }
+        printf("%.02lf$\n",dol/100.0);
+    }
+
+return 0;
+}

@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+using namespace std;
+int binarycon(int n){
+	
+	int temp=n,num=0;
+	
+	while(n>0){
+		
+		temp=n%2;
+		if(temp==1){
+			num=num+temp;
+		}
+		n=n/2;
+	}
+	
+	return num;	
+}
+
+
+int hexcon(int n){
+	
+	int temp=n, num=0;
+	while(n>0){
+		
+		temp=n%10;
+		num+=binarycon(temp);
+		n=n/10;
+	}
+	
+	return num;	
+}
+
+
+int main() {
+	
+	int n, b, h;
+	int num;
+	scanf("%d", &n);
+	for(int t=1; t<=n ; t++){
+		
+		scanf("%d", &num);
+		b=binarycon(num);
+		h=hexcon(num);
+		printf("%d %d\n", b, h);	
+		
+	}
+	
+	return 0;
+}

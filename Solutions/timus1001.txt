@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <math.h>
+#include <vector>
+using namespace std;
+
+int main() {
+	
+	long long n;
+	double val;
+	vector<double> st;
+	
+	while(scanf("%lld", &n)==1){
+		
+		val=sqrt(n);
+		st.push_back(val);
+	//	printf("%.4lf\n", val);
+		
+	}
+	
+	for(int i=st.size()-1; i>=0 ; i--){
+		
+		printf("%.4lf\n", st.at(i));
+	}
+	return 0;
+}

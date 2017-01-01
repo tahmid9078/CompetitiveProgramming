@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 1005
+vector<int> graph[MAX];
+int dist[MAX];
+int N, E;
+
+void init(){
+	for(int i =0; i<N; i++){
+		graph[i].clear();
+	}
+	memset(dist, -1, sizeof(dist));
+}
+void bfs(int s){
+	queue<int> q;
+	dist[s]=0;
+	q.push(s);
+	while(!q.empty()){
+		int u=q.front(); q.pop();
+		for(int i=0; i<graph[u].size(); i++){
+			int v=graph[u][i];
+			if(dist[v]==-1){
+				dist[v]=dist[u]+1;
+				q.push(v);
+			}
+		}
+	}
+}
+int main() {
+	int t, tc=1, q, a, b;
+	bool flag=false;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &N, &E);
+		init();
+		for(int i=0; i<E; i++){
+			scanf("%d %d", &a, &b);
+			graph[a].push_back(b);
+			graph[b].push_back(a);
+		}
+		bfs(0);
+		if(flag) printf("\n");
+		flag=true;
+		for(int i=1; i<N; i++){
+			printf("%d\n", dist[i]);
+		}
+	}
+	
+	
+	
+	return 0;
+}

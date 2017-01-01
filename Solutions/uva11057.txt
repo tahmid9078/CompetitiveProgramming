@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int ar[10010];
+	int n,m, hi, lo;
+	bool blank=false;
+	while(scanf("%d", &n)==1){
+		
+		for(int i=0; i < n; i++){
+			scanf("%d", &ar[i]);
+		}
+		sort(ar, ar+n);
+		scanf("%d", &m);
+		for(int i=0; i<n-1; i++){
+			for(int j=i+1; j<n; j++){
+				if((ar[i]+ar[j])==m){
+					hi=ar[i];
+					lo=ar[j];
+					break;
+				}
+			}
+		}
+
+		printf("Peter should buy books whose prices are %d and %d.\n\n", hi,lo);
+	}
+	return 0;
+}

@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+main() {
+    int t, len;
+    char str[12];
+    cin >> t;
+    getchar();
+    while (t--) {
+        cin.getline(str,sizeof(str));
+        len = strlen(str);
+        sort(str,str+len);
+        do {
+            puts(str);
+        } while (next_permutation(str,str+len));
+        cout << endl;
+    }
+}

@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n,m;
+	map<string,int> mp;
+	string line;
+	string word;
+	int val;
+	while(scanf("%d %d", &n, &m)==2){
+		for(int i=0; i<n; i++){
+			cin >> word >> val;
+			mp[word]=val;
+		}
+		for(int i=0; i<m; i++){
+			int ans=0;
+			while(cin>>word){
+				if(word==".") break;
+				ans+=mp[word];
+			}
+			cout<<ans<<endl;
+		}
+	}
+	return 0;
+}

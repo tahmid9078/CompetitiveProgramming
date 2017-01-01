@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int dx[8]={0, 0, 1, -1, 1, -1, -1, 1};
+int dy[8]={1, -1, 0, 0, 1, 1, -1, -1};
+char graph[105][105];
+int r,c;
+void init(){
+	for(int i=0; i<r; i++){
+		for(int j=0; j<c; j++){
+			graph[i][j]='.';
+		}
+	}
+}
+
+int bfs(){
+	int cnt=0;
+	for(int i=0; i<r; i++){
+		for(int j=0; j<c; j++){
+			if(graph[i][j]=='*'){
+				int tmp=0;
+				for(int k=0; k<8; k++){
+					int x=i+dx[k];
+					int y=j+dy[k];
+					if(x>=0 && x<r && y>=0 && y<c){
+						if(graph[x][y]=='*'){
+							tmp++;
+						}
+					}
+				}
+				if(tmp==0) cnt++;
+			}
+		}
+	}
+	return cnt;
+}
+int main() {
+	while(true){
+		scanf("%d %d", &r, &c);
+		getchar();
+		if(r==0 && c==0) break;
+		init();
+		for(int i=0; i<r; i++){
+			for(int j=0; j<c; j++){
+				scanf("%c", &graph[i][j]);
+			}
+			getchar();
+		}
+		/*for(int i=0; i<r; i++){
+			for(int j=0; j<c; j++){
+				printf("%c", graph[i][j]);
+			}
+			printf("\n");
+		}*/
+		printf("%d\n", bfs());
+	}
+}

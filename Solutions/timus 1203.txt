@@ -1,0 +1,37 @@
+    #include <bits/stdc++.h>
+    using namespace std;
+     
+    typedef pair<int,int> pii;
+     
+    bool cmp(pii a, pii b){
+    	if(a.second<b.second) return true;
+    	else{
+    		if(a.second == b.second){
+    		  if(a.first<b.first) return true;
+    		}
+    		return false;
+    	}
+    }
+     
+    int main() {
+    	int n,a,b;
+    	pii p;
+    	while(scanf("%d", &n) == 1){
+    		vector<pii> ar;
+    	for(int i=0; i<n; i++){
+    		scanf("%d %d", &a, &b);
+    		ar.push_back(make_pair(a,b));
+    	}
+    	sort(ar.begin(), ar.end(), cmp);
+    	int ans=0;
+    	int last=-1;
+    	for(int i=0; i<n; i++){
+    		if(ar[i].first>last){
+    			last=ar[i].second;
+    			ans++;
+    		}
+    	}
+    	printf("%d\n", ans);
+    	}
+    	return 0;
+    }

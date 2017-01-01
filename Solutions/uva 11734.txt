@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string Marge(string a){
+    string b;
+    for(int i = 0;i<a.length(); i++){
+        if(a[i] != ' ')
+            b.push_back(a[i]);
+    }
+    return b;
+}
+
+int main(){
+    string str1 , str2;
+    long t , tcase=1;
+    cin >> t;
+    getchar();
+    while(t--){
+        getline(cin , str1);
+        getline(cin , str2);
+        if(str1 == str2) printf("Case %d: Yes\n",tcase++);
+        else{
+            str1 = Marge(str1);
+            str2 = Marge(str2);
+            if(str1 == str2) printf("Case %d: Output Format Error\n",tcase++);
+            else printf("Case %d: Wrong Answer\n",tcase++);
+        }
+    }
+
+    return 0;
+}

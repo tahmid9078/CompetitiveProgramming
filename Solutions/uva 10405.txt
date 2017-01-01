@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+char s1[1005];
+char s2[1005];
+int dp[1005][1005];
+
+int main(){
+    int s1Len, s2Len;
+    while(true){
+        cin.getline(s1, sizeof(s1));
+        cin.getline(s2, sizeof(s2));
+        s1Len=strlen(s1);
+        s2Len=strlen(s2);
+        if(s1Len==0)break;
+        for(int i=1; i<=s1Len; i++){
+        	for(int j=1; j<=s2Len; j++){
+        		if(s1[i-1]==s2[j-1]){
+        			dp[i][j]=1+dp[i-1][j-1];
+        		}
+        		else{
+        			dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
+        		}
+        	}
+        }
+        printf("%d\n",dp[s1Len][s2Len]);
+    }
+return 0;
+}

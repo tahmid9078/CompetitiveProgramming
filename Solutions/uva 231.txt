@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    vector<int> seq;
+    vector<int> lis;
+    int num,sz,Case=1,Max;
+    while(true){
+        scanf("%d", &num);
+        if(num==-1)break;
+        seq.push_back(num);
+        while(scanf("%d", &num) && num!=-1){
+            seq.push_back(num);
+        }
+        int sz=seq.size();
+        lis.assign(sz,1);
+        Max=-1;
+        for(int i=sz-1; i>=0; i--){
+            for(int j=sz-1; j>i; j--){
+                if(seq[j]<seq[i]){
+                    if(lis[i]<lis[j]+1){
+                        lis[i]=lis[j]+1;
+                    }
+                }
+                if(lis[i]>Max){
+                    Max=lis[i];
+                }
+            }
+        }
+        if (Case != 1) printf("\n");
+        printf("Test #%d:\n", Case++);
+       	printf("  maximum possible interceptions: %d\n", Max);
+       	
+       	lis.clear();
+       	seq.clear();
+    }
+return 0;
+}

@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    vector<int> seq;
+    vector<int> lis;
+    vector<int> prev;
+    int printLIS[10005];
+    int num,sz,tcase,Max,maxindex;
+    char ch[25];
+    bool blank=false;
+    scanf("%d", &tcase);
+    scanf("\n");
+    while(tcase--){
+        while(true){
+        	cin.getline(ch, sizeof(ch));
+        	if(strlen(ch)==0) break;
+        	seq.push_back(atoi(ch));
+        }
+        int sz=seq.size();
+        for(int i=0; i<sz; i++){
+        	lis.push_back(1);
+        	prev.push_back(i);
+    	}
+        Max=-1;
+        for(int i=0; i<sz; i++){
+            for(int j=0; j<i; j++){
+                if(seq[j]<seq[i]){
+                    if(lis[i]<lis[j]+1){
+                        lis[i]=lis[j]+1;
+                        prev[i]=j;
+                    }
+                }
+            }
+        }
+        for(int i=sz-1; i>=0 ; i--){
+        	if(lis[i]>Max){
+                Max=lis[i];
+                maxindex=i;
+            }
+        }
+        if (blank==true) printf("\n");
+        blank=true;
+        printf("Max hits: %d\n",Max);
+        printLIS[Max]=seq[maxindex];
+        for(int i=Max-1; i>0;i--){
+        	printLIS[i]=seq[prev[maxindex]];
+        	maxindex=prev[maxindex];
+        }
+        for(int i=1;i<=Max;i++){
+        	printf("%d\n",printLIS[i]);
+        }
+        scanf("\n");
+        lis.clear();
+        prev.clear();
+        seq.clear();
+        memset(printLIS,0, sizeof(printLIS));
+    }
+return 0;
+}

@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long int ullt;
+
+ullt dp[61][61]={0};
+ullt trib (int n, int back){
+    if (n<=1) return 1;
+    if (dp[n][back] != 0) return dp[n][back];
+    ullt sum=1;
+    for (int i=1; i<=back; i++)
+        sum += trib(n-i,back);
+    return dp[n][back]=sum;
+}
+int main(){
+    int n, back, tcase=1;
+    while (true){
+    	scanf("%d%d",&n,&back);
+        if (n > 60) break;
+        printf("Case %d: %llu\n",tcase++,trib(n,back));
+    }
+    return 0;
+}

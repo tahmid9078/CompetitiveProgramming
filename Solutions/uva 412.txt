@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int gcd(int a, int b){
+	if(a==0) return b;
+	return gcd(b%a,a);
+}
+int main() {
+	int n;
+	int ar[55];
+	while(true){
+		scanf("%d", &n);
+		if(n==0) break;
+		for(int j=0; j<n; j++){
+			scanf("%d", &ar[j]);
+		}
+		int totpair=n*(n-1)/2;
+		int cnt=0;
+		for(int i=0; i<n-1; i++){
+			for(int j=i+1; j<n; j++){
+				int g=gcd(ar[i], ar[j]);
+				if(g==1)cnt++;
+			}
+			
+		}
+		if(cnt==0) printf("No estimate for this data set.\n");
+		else printf("%.6lf\n", sqrt((6*(double)totpair)/(double)cnt));
+	}
+	return 0;
+}

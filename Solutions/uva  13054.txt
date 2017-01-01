@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int hi[100010]; 
+bool flag[100010];
+int main() {
+    int t, tcase=1;
+    int n,h,ta,tb;
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d %d %d %d", &n, &h, &ta, &tb);
+        for (int i=0; i<n; i++)
+            scanf("%d", &hi[i]);
+        sort(hi, hi+n);
+        
+        long long ret=0;
+        memset(flag,false,sizeof(flag));
+        int last=n-1;
+        for (int i=0; i<n; i++) {
+            if (flag[i] == true)continue;
+            while (last>i&&(hi[i]+hi[last]>=h || flag[last]==true)) last--;
+            if (last>i && hi[i]+hi[last]<h && flag[last]==false && ta+ta>tb) {
+                ret+=tb;
+                flag[last]=true;
+                flag[i]=true;
+            } else {
+                ret+=ta;
+                flag[i]=true;
+            }
+        }
+        printf("Case %d: %lld\n", tcase++, ret);
+    }
+    return 0;
+}

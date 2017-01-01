@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+int main() {
+	int n,k,tmp;
+	ll ans=0;
+	multiset<int>s;
+	multiset<int>::iterator fst,lst;
+	while(true){
+		scanf("%d", &n);
+		if(n==0) break;
+		ans=0;
+		for(int i=0; i<n; i++){
+			scanf("%d", &k);
+			while(k--){
+				scanf("%d", &tmp);
+				s.insert(tmp);
+			}
+			fst=s.begin();
+			lst=s.end();
+			lst--;
+			ans+=(*lst-*fst);
+			s.erase(fst);
+			s.erase(lst);
+		}
+		printf("%lld\n",ans);
+		s.clear();
+	}
+	return 0;
+}

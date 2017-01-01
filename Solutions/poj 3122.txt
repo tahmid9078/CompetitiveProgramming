@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define EPS 1e-6
+#define PI acos(-1.0)
+
+int main() {
+	int t,n,f,tmp,cnt=0;
+	double hi,lo,mid;
+	double area[10005];
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &n, &f);
+		f++;
+		lo=0;
+		hi=-5;
+		for(int i=0; i<n; i++){
+			scanf("%d", &tmp);
+			area[i]=tmp*tmp*PI;
+			hi=max(hi,area[i]);
+		}
+		
+		while(fabs(hi-lo)>EPS){
+			mid=(hi+lo)/2.0;
+			cnt=0;
+			for(int i=0; i<n; i++){
+				cnt+=(int)(area[i]/mid);
+			}
+			if(cnt>=f){
+				lo=mid;
+			}
+			else{
+				hi=mid;
+			}
+		}
+		printf("%.4lf\n",mid);
+	}
+	return 0;
+}

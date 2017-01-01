@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define EPS 1e-9
+
+double fnc(double p, double q, double r, double s, double t, double u, double x){
+	double val=p*exp(-x)+q*sin(x)+r*cos(x)+s*tan(x)+t*(x*x)+u;
+	return val;
+}
+
+int main() {
+	double p,q,r,s,t,u,x;
+	double val,lo,hi,mid;
+	while(scanf("%lf %lf %lf %lf %lf %lf", &p, &q, &r, &s, &t, &u)==6){
+		double loVal=fnc(p,q,r,s,t,u,0);
+		double hiVal=fnc(p,q,r,s,t,u,1);
+		if((loVal<0 && hiVal<0)||(loVal>0 && hiVal>0)){
+			printf("No solution\n");
+			continue;
+		}
+		lo=0;
+		hi=1;
+		while(fabs(hi-lo)>EPS){
+			mid=(hi+lo)/2.0;
+			val=fnc(p,q,r,s,t,u,mid);
+			if(val>0){
+				lo=mid;
+			}
+			if(val<0){
+				hi=mid;
+			}
+		}
+		printf("%.4lf\n", mid);
+	}
+	return 0;
+}

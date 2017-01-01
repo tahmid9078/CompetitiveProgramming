@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	long long n,tcase=1;
+	long long c,r,q;
+	long long remC;
+	vector<long long> ans;
+	scanf("%lld", &n);
+	while(n--){
+		scanf("%lld %lld", &c, &r);
+		if(r==c){
+			printf("Case #%lld: 0\n",tcase++);
+		}
+		else{
+			remC=c-r;
+		
+			long long sqr =  sqrt(remC);
+			for(long long i=1; i<=sqr; i++){
+				if(remC%i==0){
+					if(i>r) ans.push_back(i);
+					if((remC/i)>r && (remC/i)!=i) ans.push_back(remC/i);
+				}
+			}
+			long long size=ans.size();
+			sort(ans.begin(), ans.end());
+			printf("Case #%lld:",tcase++);
+			for(long long i=0; i<size; i++){
+				printf(" %lld", ans[i]);
+			}
+			printf("\n");
+			ans.clear();
+		}
+	}
+	return 0;
+}

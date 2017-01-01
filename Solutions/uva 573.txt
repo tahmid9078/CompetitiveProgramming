@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	double h,u,d,f;
+	while(scanf("%lf %lf %lf %lf", &h, &u, &d, &f)==4){
+		if(h==0 && u==0 && d==0 && f==0) break;
+	//	printf("%d %d %d %d\n", h, u, d, f);
+		int cnt=0;
+		double fall=f*u/100;
+		double currH=0.0;
+		while(true){
+			cnt++;
+			if(u>0)currH+=u;
+			u-=fall;
+			if(currH>h) break;
+			currH-=d;
+			if(currH<0) break;
+		}
+		if(currH>h) printf("success on day %d\n",cnt);
+		else if(currH<0)  printf("failure on day %d\n",cnt);
+	}
+	return 0;
+}

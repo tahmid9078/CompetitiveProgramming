@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    int n,m,qu, MinDif,tmp,csum,tcase=1;
+    int ar[1010];
+    int sum[1000010];
+    while(true){
+    	scanf("%d", &n);
+    	if(n==0) break;
+    	for(int i=0; i<n; i++){
+    		scanf("%d", &ar[i]);
+    	}
+    	int k=0;
+    	for(int i=0; i<n; i++){
+    		for(int j=i+1; j<n; j++){
+    			sum[k]=ar[i]+ar[j];
+    			k++;
+    		}
+    	}
+    	scanf("%d", &m);
+    	printf("Case %d:\n", tcase++);
+    	for(int i=0; i<m ; i++){
+    		scanf("%d", &qu);
+    		MinDif=9999999;
+    		for(int j=0; j<k; j++){
+    			tmp=abs(sum[j]-qu);
+    			if(tmp<=MinDif){
+    				MinDif=tmp;
+    				csum=sum[j];
+    			}
+    		}
+    		printf("Closest sum to %d is %d.\n", qu, csum);
+    	}
+    }
+    
+return 0;
+}

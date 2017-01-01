@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,a,f,k,lp;
+	int sto[10];
+	sto[1]=1;
+	sto[2]=22;
+	sto[3]=333;
+	sto[4]=4444;
+	sto[5]=55555;
+	sto[6]=666666;
+	sto[7]=7777777;
+	sto[8]=88888888;
+	sto[9]=999999999;
+	
+	bool blank=false;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &a, &f);
+		lp=a*2-1;
+		
+		for(int i=1; i<=f ; i++){
+			if(blank)printf("\n");
+			blank=true;
+			k=1;
+			for(int j=1; j<=lp; j++){
+				if(j<a){
+					printf("%d\n",sto[j]);
+					k++;
+				}
+				else{
+					printf("%d\n",sto[k]);
+					k--;
+				}
+			}
+		}
+	}
+	return 0;
+}

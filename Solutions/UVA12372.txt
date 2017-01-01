@@ -1,0 +1,25 @@
+#include <stdio.h>
+using namespace std;
+
+int main() {
+	
+	int t, tcase=1;
+	int l,w,h ;
+	
+	scanf("%d", &t);
+
+	while(tcase<=t){
+	 
+	 scanf("%d %d %d" ,&l , &w, &h );
+	 if(l>20 || w>20 || h>20){
+	 	
+	 	printf("Case %d: bad\n", tcase);
+	 }
+	 else{
+	 	
+	 	printf("Case %d: good\n", tcase);
+	 }
+	 tcase++;
+	}
+	return 0;
+}

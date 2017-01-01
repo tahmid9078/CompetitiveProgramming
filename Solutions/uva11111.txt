@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <iostream>
+#include <sstream>
+#include <stack>
+#include <vector>
+#include <string.h>
+#include <math.h>
+
+using namespace std;
+char line[1000000];
+
+int main() {
+	
+	stack<int> val;
+	stack<int> cap;
+	vector<int> v;
+	while(true){
+	
+		cin.getline(line, sizeof(line));
+		int len=strlen(line);
+		if(len==0){
+			break;
+		}
+		stringstream ss(line);
+		int x;
+		while(ss>>x){
+			v.push_back(x);
+		}
+		
+		int size=v.size();
+		val.push(abs(v[0]));
+		cap.push(abs(v[0]));
+		bool flag=true;
+		for(int i=1; i<size; i++){
+			
+			if(v[i]<0){
+				val.push(abs(v[i]));
+					
+				int oldCap=cap.top();
+				cap.pop();
+				int newCap=oldCap-abs(v[i]);
+				if(newCap>oldCap || newCap<=0){
+					flag=false;
+					break;
+				}
+				else{
+					cap.push(newCap);
+					cap.push(abs(v[i]));
+				}
+			}
+			if(v[i]>0){
+				
+				int checkVal=val.top();
+				val.pop();
+				int checkCap=cap.top();
+				cap.pop();
+				if(v[i]!=checkVal){
+					flag=false;
+					break;
+				}
+			}
+		}
+		
+		if(!cap.empty()){
+			flag=false;
+		}
+		
+		if(flag==true){
+			printf(":-) Matrioshka!\n");
+		}
+		else{
+			printf(":-( Try again.\n");
+		}
+		
+		v.clear();
+		while(!val.empty()){
+			val.pop();
+		}
+		while(!cap.empty()){
+			cap.pop();
+		}
+	}
+	return 0;
+}

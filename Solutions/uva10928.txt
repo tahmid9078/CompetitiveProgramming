@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+	int t,p,x,Min;
+	char line[1000000];
+	vector<int> v;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d",&p);
+		scanf("\n");
+		for(int i=1; i<=p; i++){
+			cin.getline(line,sizeof(line));
+			
+			stringstream ss(line);
+			int tmp=0;
+			while(ss>>x){
+				tmp++;
+			}
+			v.push_back(tmp);
+		}
+		Min=9999999;
+		for(int i=0; i<v.size(); i++){
+			if(v[i]<Min){
+				Min=v[i];
+			}
+		}
+		bool flag=true;
+		for(int i=0; i<v.size(); i++){
+			if(v[i]==Min && flag){
+				printf("%d",i+1);
+				flag=false;
+			}
+			else if(v[i]==Min){
+				printf(" %d",i+1);
+			}
+		}
+		printf("\n");
+		v.clear();
+	}
+	return 0;
+}

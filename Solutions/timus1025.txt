@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	
+	int k,n;
+	scanf("%d", &k);
+	int grp[k];
+	int j=0;
+	for(int i=1; i<=k ; i++){
+		
+		scanf("%d",&n);
+		grp[j]=n;
+		j++;
+	}
+	
+	sort(grp, grp+k);
+	
+	int half=(k/2)+1;
+	int tot=0;
+	for(int i=0; i<half; i++){
+		
+		tot=tot+(grp[i]/2)+1;
+	}
+	
+	printf("%d\n", tot);
+	return 0;
+}

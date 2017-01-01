@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n;
+	int x,y,m;
+	scanf("%d", &n);
+	while(n--){
+		scanf("%d %d %d", &x, &y, &m);
+		int totWorkHr=x+y;
+		int eachWorkedFor=totWorkHr*60/3;
+		int AWorkedExtra=x*60-eachWorkedFor;
+		if(AWorkedExtra<=0){
+			printf("0\n");
+		}
+		else{
+			printf("%d\n",((m*AWorkedExtra/60)/(eachWorkedFor/60)));
+		}
+	}
+	
+	return 0;
+}

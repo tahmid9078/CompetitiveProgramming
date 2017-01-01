@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <algorithm>
+#include <string.h>
+using namespace std;
+
+int parent[50002];
+int ranks[50002];
+int set=0;
+
+int find(int u){
+	if(parent[u]==u){
+		return u;
+	}
+	return parent[u]=find(parent[u]);
+}
+
+void unionfind(int u, int v){
+	
+	int pu=find(u);
+	int pv=find(v);
+	
+	if(pu==pv){
+		return;
+	}
+	set--;
+	if(ranks[pv]<ranks[pu]){
+		parent[pv]=pu;
+	}
+	else if(ranks[pv]>ranks[pu]){
+		parent[pu]=pv;
+	}
+	else {
+		parent[pv]=pu;
+		ranks[pu]+=1;
+	}
+}
+
+int main() {
+	
+	int n, m,n1,n2,t=1;
+	while(scanf("%d %d", &n , &m)){
+		
+		if(n==0 && m==0){
+			break;
+		}
+		for(int i=1; i<=n; i++){
+			parent[i]=i;
+			ranks[i]=1;
+		}
+		set=n;
+		for(int i=1; i<=m; i++){
+			
+			scanf("%d %d", &n1, &n2 );
+			unionfind(n1,n2);
+		}
+		printf("Case %d: %d\n",t++,set);
+		memset(parent,0,sizeof parent);
+		memset(ranks,0,sizeof ranks);
+		
+	}
+	return 0;
+}

@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n;
+int dp[101][50005];
+int coin[101];
+int call(int i, int cost){
+	int a=0,b=0;
+	if(i>=n) return 0;
+	if(cost-coin[i]==0) return dp[i][cost]=cost;
+	if(dp[i][cost]!=-1) return dp[i][cost];
+	if(cost-coin[i]>0)
+		a=coin[i]+call(i+1, cost-coin[i]);
+	b=call(i+1,cost);
+	return dp[i][cost]=max(a,b);
+}
+
+int main() {
+	int t;
+	int total;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d", &n);
+		memset(dp, -1, sizeof(dp));
+		total=0;
+		for(int i=0; i<n; i++){
+			scanf("%d", &coin[i]);
+			total+=coin[i];
+		}
+		int x=call(0,total/2);
+		printf("%d\n",total-(2*x));
+	}
+	return 0;
+}

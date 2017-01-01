@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+using namespace std;
+struct input{
+	char c;
+	int x;
+};
+
+bool comp(input a, input b){
+	if(a.x>b.x) return true;
+	else if((a.x==b.x) && (a.c<b.c)) 
+			return true;
+	else return false;
+	
+}
+
+int main() {
+	input in[26];
+	char line[1000000];
+	int tmp='A',len,t;
+	for(int i=0; i<26; i++){
+		in[i].c=tmp;
+		tmp+=1;
+	}
+	scanf("%d",&t);
+	while(t--){
+		scanf(" %[^\n]s",line);
+		len=strlen(line);
+		for(int i=0; i<len; i++){
+			if(line[i]>='A' && line[i]<='Z'){
+			//	printf("%c",line[i]);
+				in[line[i]-'A'].x++;
+			}
+			else if(line[i]>='a' && line[i]<='z'){
+			//	printf("%c",line[i]);
+				in[line[i]-'a'].x++;
+			}
+		}
+		for(int i=0; i<len; i++){
+			line[i]=0;
+		}
+	}
+	sort(in , in+26, comp);
+	
+	for(int i=0; i<26; i++){
+		if(in[i].x==0) break;
+		printf("%c %d", in[i].c , in[i].x);
+		printf("\n");
+	}
+	
+	return 0;
+}

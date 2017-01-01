@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+
+const int MAX = 20000+10;
+const int INF = 0x3f3f3f3f;
+
+vector<pii> graph[MAX];
+int dist[MAX];
+
+void dijkstra(int start){
+    int u,v,c,w;
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    pq.push(pii(0, start));
+    dist[start]=0;
+    while(!pq.empty()){
+        u=pq.top().second;
+        c=pq.top().first;
+        pq.pop();
+        if(c>dist[u])continue;
+
+        for(int i=0; i<graph[u].size(); i++){
+            v=graph[u][i].first;
+            w=graph[u][i].second;
+
+            if(dist[v]>dist[u]+w){
+                dist[v]=dist[u]+w;
+                pq.push(pii(dist[v], v));
+            }
+        }
+    }
+}
+int main(){
+    int t,tcase=1;
+    int n,m,u,v,w,s,f;
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d %d %d", &n, &m, &s, &f);
+
+        for(int i=0; i<=n; i++) graph[i].clear();
+        memset(dist,INF,sizeof(dist));
+
+        for(int i=0; i<m; i++){
+            scanf("%d %d %d", &u, &v, &w);
+            graph[u].push_back(pii(v,w));
+            graph[v].push_back(pii(u,w));
+        }
+        dijkstra(s);
+        if(dist[f]==INF) printf("Case #%d: unreachable\n", tcase++);
+        else printf("Case #%d: %d\n",tcase++,dist[f]);
+    }
+return 0;
+}
+
+
+
+
+
+

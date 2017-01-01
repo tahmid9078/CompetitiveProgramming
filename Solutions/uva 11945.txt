@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t, tc=1;
+	double tmp,ans,sum;
+	scanf("%d", &t);
+	while(t--){
+		sum=0;
+		for(int i=0; i<12; i++){
+			scanf("%lf", &tmp);
+			sum+=tmp;
+		}
+		ans=sum/12;
+		if(ans>999.99) printf("%d $%ld,%.2lf\n",tc++,(long)(ans/1000.0),fmod(ans,1000.0));
+		else printf("%d $%.2lf\n", tc++, ans);
+	}
+	return 0;
+}

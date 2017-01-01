@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int dx[4]={0, 0, 1, -1};
+int dy[4]={1, -1, 0, 0};
+int cost[1005][1005];
+int visited[1005][1005];
+int bomb[1005][1005];
+int R,C;
+
+void init(){
+	memset(visited,0,sizeof(visited));
+    memset(cost,0,sizeof(cost));
+    memset(bomb,0,sizeof(bomb));
+}
+void bfs(int r, int c){
+	queue<int> q;
+	visited[r][c]=1;
+	cost[r][c]=0;
+	q.push(r);
+	q.push(c);
+	while(!q.empty()){
+		int x=q.front(); q.pop();
+		int y=q.front(); q.pop();
+		for(int i=0; i<4; i++){
+			int x1=x+dx[i];
+			int y1=y+dy[i];
+			if((x1>=0 && x1<R && y1>=0 && y1<C) && bomb[x1][y1]==0){
+				if(!visited[x1][y1] && !cost[x1][y1]){
+					cost[x1][y1]=cost[x][y]+1;
+					visited[x1][y1]=1;
+					q.push(x1);
+					q.push(y1);
+				}
+			}
+		}
+	}
+}
+
+int main() {
+	int br,r,n,c, s,s1 , e,e1;
+	while(true){
+		init();
+		scanf("%d %d", &R, &C);
+		if(R==0 && C==0) break;
+		scanf("%d", &br);
+		for(int i=0; i<br; i++){
+			scanf("%d", &r);
+			scanf("%d", &n);
+			for(int j=0; j<n; j++){
+				scanf("%d", &c);
+				bomb[r][c]=1;
+			}
+		}
+		scanf("%d %d", &s, &s1);
+		scanf("%d %d", &e, &e1);
+		bfs(s,s1);
+		printf("%d\n", cost[e][e1]);
+	}
+	
+	
+	
+	return 0;
+}

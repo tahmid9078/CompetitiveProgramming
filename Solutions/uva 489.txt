@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int stroke;  
+bool pos[105];  
+int solve(string a,string b)  {  
+    int cnt;
+    bool flag=false;  
+    stroke=0;
+    cnt=0;   
+    memset(pos,false,sizeof(pos));  
+    for(int i=0;i<b.length();i++){  
+        flag=false;  
+        if(stroke==7) break;  
+        for(int j=0;j<a.length();j++){  
+            if(b[i]==a[j]&&!pos[j]){  
+                pos[j]=true;  
+                cnt++;  
+                flag=true;  
+            }  
+        }  
+        if(!flag)  
+            stroke++;  
+    }  
+    return cnt;  
+}  
+int main()  
+{  
+    int n,res;
+    string a,b;  
+    while(true)  {  
+        scanf("%d", &n);
+        if(n==-1) break;
+        cin >> a;
+        cin >>b;
+        res=solve(a,b);  
+        printf("Round %d\n",n);  
+        if(res==a.length()) printf("You win.\n");  
+        else if(stroke==7) printf("You lose.\n");  
+        else printf("You chickened out.\n");  
+    }  
+    return 0;  
+}  

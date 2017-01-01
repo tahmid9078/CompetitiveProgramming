@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,tc=1;
+	int r, c, m, n, letter[26], totlet;
+    char line[50];
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d %d %d",&r, &c, &m, &n);
+        memset(letter,0,sizeof(letter));
+        totlet=0;
+        for(int i=0; i<r; i++){
+            scanf("%s",line);
+            for(int j=0; j<c; j++){ 
+            	letter[line[j]-'A']++;
+            	totlet++;
+            }
+        }
+      //  printf("%d\n", totlet);
+        int Max=0, imp=0;
+        for(int i=0; i<26; i++){
+            if(letter[i]>Max){
+                Max=letter[i];
+                imp=1;
+            }
+            else if(letter[i]==Max){
+                imp++;
+            }
+        }
+        int unimp=totlet-(Max*imp);
+        printf("Case %d: %d\n",tc++,m*Max*imp+n*unimp);
+    }
+	return 0;
+}

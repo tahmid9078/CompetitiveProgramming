@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n,d,r,totd, Min;
+    int morn[110];
+    int even[101];
+    while(true){
+    	scanf("%d %d %d", &n, &d, &r );
+    	Min=0;
+    	if(n==0 && d==0 && r==0) break;
+    	for(int i=0; i<n; i++){
+    		scanf("%d", &morn[i]);
+    	}
+    	for(int i=0; i<n; i++){
+    		scanf("%d", &even[i]);
+    	}
+    	sort(morn, morn+n);
+    	sort(even, even+n, greater<int>());
+    	for(int i=0;i<n; i++){
+    		totd=morn[i]+even[i];
+    		if(totd>d){
+    			Min+=(totd-d)*r;
+    		}
+    	}
+    	printf("%d\n", Min);
+    }
+    return 0;
+}

@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define INF 100000000
+
+int maze[1010][1010];
+int dist[1010][1010];
+typedef pair<int, int> ii;
+typedef pair<int, ii> iii;
+int n,m;
+int dx[]={1,-1,0,0};
+int dy[]={0,0,1,-1};
+bool checker(int x, int y){
+	if(x<0 || x>=n || y<0 || y>=m) return false;
+	else return true;
+}
+int dijestra(){
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			dist[i][j]=INF;
+		}
+	}
+	priority_queue<iii, vector<iii>, greater<iii>> pq;
+	dist[0][0]=maze[0][0];
+	pq.push(make_pair(dist[0][0],ii(0,0)));
+	while(!pq.empty()){
+		iii now=pq.top();pq.pop();
+		int d=now.first;
+		int x=now.second.first;
+		int y=now.second.second;
+		if(dist[x][y]==d){
+			for(int i=0; i<4; i++){
+				int nx=x+dx[i];
+				int ny=y+dy[i];
+				if(checker(nx, ny)){
+					if(dist[nx][ny]>dist[x][y]+maze[nx][ny]){
+						dist[nx][ny]=dist[x][y]+maze[nx][ny];
+						pq.push(make_pair(dist[nx][ny],ii(nx,ny)));
+					}
+				}
+			}
+		}
+	}
+	return dist[n-1][m-1];
+}
+int main() {
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &n, &m);
+		for(int i=0; i<n; i++){
+			for(int j=0; j<m; j++){
+				scanf("%d", &maze[i][j]);
+			}
+		}
+		printf("%d\n",dijestra());
+	}
+	
+	return 0;
+}

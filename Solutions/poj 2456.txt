@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n,c;
+int ar[100005];
+	
+
+int  cowcntr(int dis){
+	int cnt=1;
+	int atNow=0;
+	for(int i=1; i<n; i++){
+		if(ar[i]-ar[atNow]>=dis){
+			cnt++;
+			atNow=i;
+		}
+	}
+	return cnt;
+}
+int main() {
+	int t,hi,lo,mid,val,ans;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &n, &c);
+		for(int i=0; i<n ; i++){
+			scanf("%d", &ar[i]);
+		}
+		sort(ar, ar+n);
+		lo=0;
+		hi=ar[n-1]-ar[0]+1;
+		while(hi>=lo){
+			mid=(hi+lo)/2;
+			val=cowcntr(mid);
+			if(val>=c){
+				ans=mid;
+				lo=mid+1;
+			}
+			else{
+				hi=mid-1;
+			}
+		}
+		printf("%d\n",ans);
+	}
+	return 0;
+}

@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n;
+	int val,p=1;
+	while(true){
+		scanf("%d", &n);
+		
+		if(n==0)break;
+		val=1;p=1;
+		while(pow(2,p)<=n){
+			val=pow(2,p);
+			p++;
+		}
+		if(val==n){
+			printf("%d\n",n);
+		}
+		else{
+			printf("%d\n",(n-val)*2);
+		}
+	}
+	return 0;
+}

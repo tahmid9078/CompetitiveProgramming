@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Max 105
+#define INF 99999999
+int dist[Max][Max];
+int n,e;
+void init(){
+	for(int i=1 ; i<=n; i++){
+		for(int j=1; j<=n; j++){
+			dist[i][j]=dist[j][i]=INF;
+		}
+		dist[i][i]=0;
+	}
+}
+void floydWarshall(){
+	for(int k=1; k<=n; k++){
+		for(int i=1 ; i<=n; i++){
+			for(int j=1; j<=n; j++){
+				if(dist[i][j]>max(dist[i][k],dist[k][j])){
+					dist[i][j]=max(dist[i][k],dist[k][j]);
+				}
+			}
+		}
+	}
+}
+int main() {
+	int q, u,v,w, tcase=1;
+	bool blank=false;
+	while(true){
+		scanf("%d %d %d", &n, &e, &q);
+		if(n==0 && e==0 && q==0) break;
+		init();
+		for(int i=0; i<e; i++){
+			scanf("%d %d %d", &u, &v, &w);
+			dist[u][v]=dist[v][u]=w;
+		}
+		floydWarshall();
+		if(blank)printf("\n");
+		blank=true;
+		printf("Case #%d\n", tcase++);
+		for(int i=0; i<q; i++){
+			scanf("%d %d", &u, &v);
+			if(dist[u][v]==INF){
+				printf("no path\n");
+			}
+			else{
+				printf("%d\n", dist[u][v]);
+			}
+		}
+	}
+	return 0;
+}
+
+
+

@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+
+int main() {
+	
+	int t;
+	int n,p,k,tmp;
+	scanf("%d", &t);
+	for(int tcase=1; tcase<=t; tcase++){
+		scanf("%d %d %d", &n, &k, &p);
+		tmp=k;
+		for(int i=1; i<=p ; i++){
+			tmp=(tmp+1)%n;
+			
+		}
+		if(tmp==0){
+			tmp=n;
+		}
+		printf("Case %d: %d\n",tcase, tmp);
+	}
+	return 0;
+}

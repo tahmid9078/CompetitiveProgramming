@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int ar[50010];
+	int n,q,m, tcase=1;
+	bool flag;
+	while(scanf("%d %d", &n , &q)==2){
+		if(n==0 && q==0) break;
+		for(int i=0; i <n; i++){
+			scanf("%d", &ar[i]);
+		}
+		sort(ar, ar+n);
+		printf("CASE# %d:\n",tcase++);
+		for(int i=0; i< q; i++){
+			scanf("%d", &m);
+			flag=false;
+			for(int j=0; j<n; j++){
+				if(m==ar[j] && flag!=true){
+					printf("%d found at %d\n",m,j+1);
+					flag=true;
+					break;
+				}
+			}
+			if(flag==false){
+				printf("%d not found\n",m);
+			}
+		}
+	}
+	return 0;
+}

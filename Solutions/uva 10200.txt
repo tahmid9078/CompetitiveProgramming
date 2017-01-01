@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define Size 1010000
+typedef long long int ll;
+bool mark[Size];
+int euCumuSum[10010];
+vector<int> prime;
+int flag[10010];
+
+bool isPrime(int n){
+	if(n<Size) return mark[n];
+	int idx = 0;
+    while(prime[idx]*prime[idx]<=n){
+        if (n%prime[idx]==0) return false;
+        idx++;
+    }
+ 
+    return true;
+}
+
+void seive(){
+	memset(mark,true,sizeof(mark));
+	mark[0]=mark[1]=false;
+	for(int i=4; i<Size; i+=2) mark[i]=false;
+	for(ll i=3; i*i<=Size; i+=2){
+		if(mark[i]){
+			for(ll j=i*i; j<Size; j+=2*i){
+				mark[j]=false;
+			}
+		}
+	}
+	prime.push_back(2);
+	for(int i=3; i<Size; i+=2){
+		if(mark[i]){
+			prime.push_back(i);
+		}
+	}
+	/*for(int i=0; i<Size; i++){
+		printf("%d ", primeCumuSum[i]);
+	}*/
+	for(int i=0; i<=10000;i++){
+		int tmp=(i*i)+i + 41;
+		if(isPrime(tmp)){
+			flag[i]=1;
+		}
+	}
+	int cnt=0;
+	for(int i=0; i<10010; i++){
+		if(flag[i]==1){
+			cnt++;
+			euCumuSum[i]=cnt;
+		}
+		else{
+			euCumuSum[i]=cnt;
+		}
+	}
+//	for(int i=0; i<=1000; i++){
+//		printf("%d: %d\n", i,euCumuSum[i]);
+//	}
+}
+
+
+
+int main() {
+	seive();
+	int a,b,e;
+	while(scanf("%d %d", &a, &b)==2){
+			e=euCumuSum[b];
+			if(a>0) e-=euCumuSum[a-1];
+		printf("%.2lf\n",(e * 100.0)/(double)(b-a+1)+ 1e-9);
+	}
+	return 0;
+}

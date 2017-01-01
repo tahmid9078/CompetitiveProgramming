@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+
+
+bool isPalin(string s){
+	int len=s.length();
+	for(int i=0; i<len-1-i; i++){
+		if(s[i]!=s[len-1-i]) 
+			return false;
+	}
+	return true;
+}
+int main() {
+	string line;
+	string s;
+	while(getline(cin,line)){
+		if(line=="DONE") break;
+		s="";
+		for(int i=0; i<line.length(); i++){
+			if(isalpha(line[i])){
+				s+=tolower(line[i]);
+			}
+		}
+	//	cout<<s<<endl;
+		if(isPalin(s)) printf("You won't be eaten!\n");
+		else printf("Uh oh..\n");
+	}
+	return 0;
+}

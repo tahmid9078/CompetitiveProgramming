@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	map<int, int> val;
+	vector<int> seq;
+	int tmp;
+	while(scanf("%d", &tmp)==1){
+		if(val[tmp]==0)seq.push_back(tmp);
+		val[tmp]++;
+	}
+	for(int i=0; i<seq.size(); i++){
+		printf("%d %d\n",seq[i],val[seq[i]]);
+	}
+	return 0;
+}

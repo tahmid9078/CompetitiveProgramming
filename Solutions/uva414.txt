@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n,totsp, tmpsp,minsp;
+	string s;
+	while(true){
+		cin>>n;
+		if(n==0)break;
+		getline(cin, s);
+		
+		totsp=0; minsp=30;
+		for(int i=0; i<n;i++){
+			getline(cin, s);
+	//		cout<< s<<endl;
+			tmpsp=0;
+			for(int j=0; j<25;j++){
+				if(s[j]==' '){
+					tmpsp++;
+					totsp++;
+				}
+			}
+			if(tmpsp<minsp){
+				minsp=tmpsp;
+			}
+		}
+		printf("%d\n",totsp-n*minsp);
+	}
+	return 0;
+}

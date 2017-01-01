@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long int ll;
+
+int dp[10005], m, n, t;
+void solve(int now){
+	if(now>t) return;
+	if(dp[now]!=0){
+		if(now+m<=t) dp[now+m]=max(dp[now+m],dp[now]+1);
+		if(now+n<=t) dp[now+n]=max(dp[now+n],dp[now]+1);
+	}
+	solve(now+1);
+}
+int main(){
+	bool flag;
+    while (scanf("%d %d %d", &m, &n, &t)==3){
+    	if(m>n) swap(m,n);
+    	memset(dp,0,sizeof(dp));
+    	dp[m]=1;
+    	dp[n]=1;
+    	solve(m);
+    	if(dp[t]) printf("%d\n", dp[t]);
+    	else{
+    		flag=true;
+    		for(int i=t-1; i>=0; i--){
+    			if(dp[i]){
+    				flag=false;
+    				printf("%d %d\n", dp[i], t-i);
+    				break;
+    			}
+    		}
+    		if(flag) printf("0 %d\n",t);
+    	}
+    }
+    return 0;
+}

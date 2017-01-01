@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,tc=1;
+	int cd,cm,cy;
+	int bd,bm,by;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d/%d/%d", &cd, &cm, &cy);
+		scanf("%d/%d/%d", &bd, &bm, &by);
+		
+	//		printf("%d/%d/%d\n", cd, cm, cy);
+	//	printf("%d/%d/%d\n", bd,bm, by);
+		int ans=(cy-by);
+		if(cm<bm){
+			ans--;
+		}
+		else if(cm==bm){
+			if(cd<bd){
+				ans--;
+			}
+		}
+		if(ans<0) printf("Case #%d: Invalid birth date\n", tc++ );
+        else if(ans>130) printf("Case #%d: Check birth date\n", tc++);
+        else printf("Case #%d: %d\n",tc++,ans);
+	}
+	return 0;
+}

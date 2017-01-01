@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,tc=1,n,tmp;
+	int mile,juice;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d", &n);
+		mile=0;
+		juice=0;
+		for(int i=0; i<n; i++){
+			scanf("%d", &tmp);
+			mile+= ( ( tmp / 30 ) + 1 ) * 10 ;
+            juice += ( ( tmp / 60 ) + 1 ) * 15 ;
+		}
+		if(mile>juice) printf("Case %d: Juice %d\n",tc++,juice);
+		else if(mile<juice) printf("Case %d: Mile %d\n",tc++,mile);
+		else if(mile==juice) printf("Case %d: Mile Juice %d\n",tc++,juice);
+	}
+	return 0;
+}

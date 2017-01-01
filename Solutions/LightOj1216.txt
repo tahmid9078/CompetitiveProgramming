@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <math.h>
+
+using namespace std;
+
+const double PI=2*acos(0.0);
+
+int main() {
+	
+	int t, tcase;
+	scanf("%d", &t);
+	double sum=0, r3;
+	
+	for(tcase=1; tcase<=t ; tcase++){
+		
+		int r1, r2 , h ,p ;
+		scanf("%d %d %d %d", &r1 , &r2 , &h, &p);
+		
+		r3 = r2 +(r1-r2)*((double)p/h);;
+		
+		sum=((PI*p)/3.0)*((r3*r3)+(r3*r2)+(r2*r2));
+		
+		printf("Case %d: %.10lf\n" , tcase, sum);
+	
+		
+	}
+	return 0;
+}

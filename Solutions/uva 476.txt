@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+ using namespace std;
+
+struct node {
+    double x1;
+    double y1;
+    double x2;
+    double y2;
+} a [12];
+ 
+int main (){
+    char ch;
+    int idx = 0;
+ 
+    while ( scanf ("%c", &ch) && ch != '*' ) {
+        if ( ch != 'r' ) continue;
+ 		scanf ("%lf", &a [idx].x1);
+        scanf ("%lf", &a [idx].y1);
+        scanf ("%lf", &a [idx].x2);
+        scanf ("%lf", &a [idx].y2);
+        idx++;
+    }
+ 
+    int pointNo = 0;
+    double x, y;
+    while ( scanf ("%lf %lf", &x, &y) && x != 9999.9 && y != 9999.9 ) {
+ 
+        bool flag = true;
+        pointNo++;
+        for ( int i = 0; i < idx; i++ ) {
+ 
+            if ( x > a[i].x1 && x < a[i].x2 && y < a[i].y1 && y > a[i].y2 ) {
+                printf ("Point %d is contained in figure %d\n", pointNo, i + 1 );
+                flag = false;
+            }
+        }
+ 
+        if ( flag )
+            printf ("Point %d is not contained in any figure\n", pointNo);
+    }
+ 
+    return 0;
+}

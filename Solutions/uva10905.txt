@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool comp(string x, string y){
+	string tmp1=x+y;
+	string tmp2=y+x;
+	if(tmp1>tmp2)return true;
+	else return false;
+}
+int main() {
+	string ar[55];
+	int n;
+	while(true){
+		scanf("%d", &n);
+		if(n==0)break;
+		for(int i=0; i<n; i++){
+			cin>>ar[i];
+		}
+		sort(ar, ar+n, comp);
+		for(int i=0; i<n; i++){
+			cout<<ar[i];
+		}
+		cout<<endl;
+	}
+	return 0;
+}

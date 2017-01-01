@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Size 10007
+typedef long long int ll;
+bool mark[Size];
+vector<ll> prime;
+pair<ll,ll> sumOffact[2000005];
+
+void seive(){
+	memset(mark, true, sizeof(mark));
+	mark[0]=mark[1]=false;
+	for(ll i=4; i<Size; i+=2) mark[i]=false;
+	for(ll i=3; i*i<=Size; i+=2){
+		if(mark[i]){
+			for(ll j=i*i; j<Size; j+=2*i){
+				mark[j]=false;
+			}
+		}
+	}
+	prime.push_back(2);
+	for(ll i=3; i<Size; i+=2){
+		if(mark[i]){
+			prime.push_back(i);
+		}
+	}
+}
+
+ll no_of_div(ll n){
+	ll cnt=0, plistsz=prime.size();
+	for(ll i=0; i<plistsz && prime[i]*prime[i]<=n; i++){
+
+		if(n%prime[i]==0){
+			while(n%prime[i]==0){
+				cnt++;
+				n=n/prime[i];
+			}
+		}
+	}
+	if(n>1){
+		cnt++;
+	}
+	return cnt;
+}
+int main() {
+	seive();
+	ll n,i;
+	int tcase=1;
+	sumOffact[1].first=1;
+    	sumOffact[1].second=1;
+    for(i=2; i<2000001; i++){
+    	sumOffact[i].first=no_of_div(i);
+    	sumOffact[i].second=i;
+    }
+    sort(sumOffact+1, sumOffact+2000001);
+    while(true){
+    	scanf("%lld", &n);
+    	if(n==0)break;
+    	printf("Case %d: %lld\n",tcase++, sumOffact[n].second);
+    }
+	return 0;
+}

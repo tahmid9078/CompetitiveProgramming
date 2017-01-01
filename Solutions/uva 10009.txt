@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<string, vector<string>> graph;
+map<string, int> visited;
+map<string, string> parent;
+
+void bfs(string s, string e){
+	queue<string> q;
+	q.push(s);
+	visited[s]=0;
+	while(!q.empty()){
+		string u=q.front(); q.pop();
+		if(u==e){
+			return;
+		}
+		for(int i=0; i<graph[u].size(); i++){
+			string v=graph[u][i];
+			if(!visited[v]){
+				visited[v]=visited[u]+1;
+				parent[v]=u;
+				q.push(v);
+			}
+		}
+	}
+}
+void printpath(string e, string b){
+	if(e==b){
+		printf("%c", b[0]);
+		return;
+	}
+	else{
+		printpath(parent[e],b);
+		printf("%c", e[0]);
+	}
+}
+int main() {
+	int n, t, q;
+	string s1, s2, beg, end;
+	bool flag=false;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &n, &q);
+		for(int i=0; i<n; i++){
+			cin>> s1>>s2;
+			graph[s1].push_back(s2);
+			graph[s2].push_back(s1);
+			/*visited[s1]=-1;
+			visited[s2]=-1;*/
+		}
+		if(flag) printf("\n");
+		flag=true;
+		for(int i=0; i<q; i++){
+			cin>> beg>>end;
+			visited.clear();
+			parent.clear();
+			bfs(beg,end);
+			printpath(end,beg);
+			printf("\n");
+		}
+		
+		graph.clear();
+		visited.clear();
+		parent.clear();
+	}
+	
+	return 0;
+}

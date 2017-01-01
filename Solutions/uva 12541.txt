@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct in{
+	char name[20];
+	int dd;
+	int mm;
+	int yy;
+};
+
+bool cmp(in a, in b){
+	if(a.yy>b.yy) return false;
+	if(a.yy==b.yy){
+		if(a.mm>b.mm) return false;
+		if(a.mm==b.mm){
+			if(a.dd>b.dd) return false;
+			else return true;
+		}
+	}
+	return true;
+}
+int main() {
+	int n;
+	in ar[105];
+	while(scanf("%d", &n)==1){
+        for(int i=0; i<n; i++){
+            scanf("%s %d %d %d", &ar[i].name, &ar[i].dd, &ar[i].mm, &ar[i].yy);
+        }
+        sort(ar,ar+n,cmp);
+      	printf("%s\n", ar[n-1].name);
+      	printf("%s\n", ar[0].name);
+	}
+	return 0;
+}

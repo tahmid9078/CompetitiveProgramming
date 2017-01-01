@@ -1,0 +1,21 @@
+#include <stdio.h>
+using namespace std;
+
+int main() {
+	
+	int a,b ;
+	int totCan=0;
+	int nshotByH=0;
+	int nshotByL=0;
+	
+	while(scanf("%d %d", &a , &b)==2){
+	 
+	 
+	 totCan=(a+b)-1;
+	 nshotByH=totCan-a;
+	 nshotByL=totCan-b;
+	 
+	 printf("%d %d\n" ,nshotByH, nshotByL);
+	}
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Max 100005
+int arr[Max];
+int tree[3*Max];
+void make_tree(int node, int st, int end){
+	if(st==end){
+		tree[node]=arr[st];
+		return;
+		
+	}
+	int left=2*node+1;
+	int right=2*node+2;
+	int mid=(st+end)/2;
+	make_tree(left, st, mid);
+	make_tree(right, mid+1, end);
+	if(tree[left]<tree[right]) tree[node]=tree[left];
+	else tree[node]=tree[right];
+}
+
+int query(int node, int n_st,int n_end,int r_st,int r_end){
+	if(r_st>n_end || r_end<n_st) return 999999999;
+	if(n_st>=r_st && n_end<= r_end) return tree[node];
+	int left=2*node+1;
+	int right=2*node+2;
+	int mid=(n_st+n_end)/2;
+	int q1=query(left, n_st, mid, r_st, r_end);
+	int q2=query(right, mid+1, n_end, r_st, r_end);
+	if(q1<q2) return q1;
+	else return q2;
+}
+int main() {
+	int t,n,q,tcase=1,r_st, r_end;
+	scanf("%d",&t);
+	while(t--){
+		scanf("%d %d",&n,&q);
+		for(int i=0;i<n;i++) scanf("%d",&arr[i]);
+		make_tree(0,0,n-1);
+		printf("Scenario #%d:\n\n",tcase++);
+		while(q--){
+			scanf("%d %d",&r_st,&r_end);
+			printf("%d\n\n",query(0,0,n-1,--r_st,--r_end));
+		}
+	}
+	return 0;
+}

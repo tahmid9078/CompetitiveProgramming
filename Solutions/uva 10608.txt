@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+int parent[30002];
+int ranks[30002];
+int cnt[30002];
+int ans;
+int find(int u){
+	if(parent[u]==u){
+		return u;
+	}
+	return parent[u]=find(parent[u]);
+}
+
+void unionfind(int u, int v){
+	
+	int pu=find(u);
+	int pv=find(v);
+	
+	if(pu==pv){
+		return;
+	}
+	if(ranks[pv]<ranks[pu]){
+		parent[pv]=pu;
+		cnt[pu]+=cnt[pv];
+		if(ans<cnt[pu]){
+			ans=cnt[pu];
+		}
+	}
+	else if(ranks[pv]>ranks[pu]){
+		parent[pu]=pv;
+		cnt[pv]+=cnt[pu];
+		if(ans<cnt[pv]){
+			ans=cnt[pv];
+		}
+	}
+	else {
+		parent[pv]=pu;
+		cnt[pu]+=cnt[pv];
+		if(ans<cnt[pu]){
+			ans=cnt[pu];
+		}
+		ranks[pu]+=1;
+	}
+}
+
+int main() {
+	int t, n,m,a,b;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%d %d", &n, &m);
+		for(int i=1; i<=n; i++){
+			parent[i]=i;
+			ranks[i]=1;
+			cnt[i]=1;
+		}
+		ans=1;
+		for(int i=0; i<m; i++){
+			scanf("%d %d", &a, &b);
+			unionfind(a,b);
+		}
+		
+		printf("%d\n",ans);
+		memset(parent, 0, sizeof(parent));
+		memset(ranks, 0, sizeof(ranks));
+	}
+	return 0;
+}

@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define Max 100005
+vector<int> graph[Max];
+int d[Max], low[Max], scc[Max], in[Max];
+bool stacked[Max];
+stack<int> s;
+int cnt, current_scc,n,e;
+
+void tarjan(int u){
+	d[u]=low[u]=++cnt;
+	s.push(u);
+	stacked[u]=true;
+	for(int i=0; i< graph[u].size(); i++){
+		int v=graph[u][i];
+		if(d[v]==-1){
+			tarjan(v);
+			low[u] = min(low[u],low[v]);
+		}
+		else if(stacked[v]){
+			low[u] = min(low[u],d[v]);
+		}
+	}
+	if (low[u]==d[u]) {
+		current_scc++;
+		while (true) {
+			int v=s.top(); s.pop();
+			scc[v]=current_scc;
+			stacked[v]=false;
+			if (v==u) break;
+		}
+	}
+}
+
+void findSCC(){
+	current_scc=0;
+	cnt=0;
+	memset(d,-1,sizeof(d));
+	memset(low,0,sizeof(d));
+  	memset(stacked,false,sizeof(stacked));
+  	memset(scc,0,sizeof(scc));
+	for(int i = 1; i<=n; i++){
+		if(d[i] == -1){
+    		tarjan(i);
+   		}
+  	}  	
+  	
+	
+}
+
+void init(){
+	scanf("%d %d", &n, &e);
+	for (int i=1; i<=n; i++){
+		graph[i].clear();
+	}
+	int u, v;
+	while (e--) {
+		scanf("%d %d", &u, &v);
+		graph[u].push_back(v);
+	}
+	findSCC();
+}
+int solve(){
+	memset(in, 0, sizeof(in));
+	for (int i=1; i<=n; i++) {
+		int u=scc[i];
+		for (int j=0; j<graph[i].size(); j++) {
+			int v=scc[graph[i][j]];
+			if (u!=v) in[v]=1;
+		}
+	}
+	int ret=0;
+	for (int i=1; i<=current_scc; i++){
+		if (!in[i]) ret++;
+	}
+	return ret;
+}
+
+int main() {
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		init();
+		printf("%d\n", solve());
+	}
+	return 0;
+}
+
+
+

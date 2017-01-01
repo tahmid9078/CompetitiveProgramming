@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	
+	string month[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    map<string, int> m;
+    for(int i = 0;i < 12;++i)
+        m[ month[i] ] = i;
+ 	int t,tc=1,d1,m1,y1,d2,m2,y2;
+ 	string s1,s2;
+ 	char c;
+ 	scanf("%d", &t);
+ 	while(t--){
+ 		cin>>s1>>d1>>c>>y1;
+ 		cin>>s2>>d2>>c>>y2;
+ 		if(m[s1]>1) y1++;
+ 		if(m[s2]<1 || (m[s2]==1 && d2<29)) y2--;
+ 		int ans = y2 / 4 - (y1 - 1) / 4;
+        ans -= y2 / 100 - (y1 - 1) / 100;
+        ans += y2 / 400 - (y1 - 1) / 400;
+        printf("Case %d: %d\n",tc++,ans);
+ 	}
+	return 0;
+}

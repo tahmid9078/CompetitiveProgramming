@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main()
+{
+
+    int t, tcase;
+
+    scanf("%d" , &t);
+
+    for(tcase=1; tcase<=t; tcase++){
+
+        int n, ret ,temp;
+		scanf("%d", &n);
+        for(int i=1 ; i<=n ; i++){
+
+            scanf("%d" , &temp);
+            if(i==(n/2)+1){
+
+                ret=temp;
+            }
+        }
+        printf("Case %d: %d\n", tcase, ret);
+
+    }
+
+    return 0;
+}

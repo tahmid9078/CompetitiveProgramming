@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	
+	double hr,min, hAngle, mAngle,angle;
+	
+	
+	while(scanf("%lf:%lf", &hr, &min)==2){
+		
+		if(hr==0 && min==0) break;
+		hAngle=hr*30+(min/60)*30;
+		mAngle=min*6;
+		
+		angle=fabs(hAngle-mAngle);
+		
+		if(angle>180){
+			angle=360-angle;
+		}
+		printf("%.3lf\n",angle);
+	}
+	return 0;
+}

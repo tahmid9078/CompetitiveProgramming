@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	char line[1000000];
+	int len;
+	while(true){
+		cin.getline(line, sizeof(line));
+		len=strlen(line);
+		if(len==0)break;
+		int i=0,cnt=0;
+		while(i<len){
+			while(!isalpha(line[i])){
+				i++;
+			}
+			while(isalpha(line[i])){
+				i++;
+			}
+			if(i<len){
+				cnt++;
+			}
+			
+		}
+		printf("%d\n",cnt);
+	}
+	return 0;
+}

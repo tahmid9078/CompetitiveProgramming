@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define INF 100000000
+typedef pair<int, int> ii;
+vector<ii> graph[105];
+int dist[105];
+int e,n,m,t;
+int dijestra(int src){
+	for(int i=1; i<=n; i++){
+		dist[i]=INF;
+	}
+	priority_queue<ii> pq;
+	dist[src]=0;
+	pq.push(ii(src, 0));
+	while(!pq.empty()){
+		ii node=pq.top();pq.pop();
+		int u=node.first;
+		int cost=node.second;
+		if(dist[u]==cost && dist[u]<=t){
+			for(int i=0; i<graph[u].size(); i++){
+				int v=graph[u][i].first;
+				int d=graph[u][i].second;
+				if(dist[v]>dist[u]+d){
+					dist[v]=dist[u]+d;
+					pq.push(ii(v, dist[v]));
+				}
+			}
+		}
+		
+	}
+	int mi=0;
+	for(int i=1; i<=n ; i++){
+		if(dist[i]<=t){
+			mi++;
+		}
+	}
+	return mi;
+}
+int main() {
+	int tc, u, v, w,blank=false;
+	scanf("%d", &tc);
+	while(tc--){
+		scanf("%d %d %d %d", &n, &e, &t, &m);
+		for(int i=0; i<m; i++){
+			scanf("%d %d %d", &u, &v, &w);
+			graph[v].push_back(ii(u,w));
+		}
+		if(blank) printf("\n");
+		blank=true;
+		printf("%d\n", dijestra(e));
+			
+		for(int i=0; i<105; i++){
+			graph[i].clear();
+		}
+	}
+	
+	return 0;
+}

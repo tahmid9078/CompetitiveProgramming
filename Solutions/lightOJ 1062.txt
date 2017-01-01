@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define EPS 1e-9
+double fnc(double x, double y, double w){
+	double tmp1=sqrt((y*y)-(w*w));
+	double tmp2=sqrt((x*x)-(w*w));
+	double ret=(tmp1*tmp2)/(tmp1+tmp2);
+	return ret;
+}
+
+int main() {
+	int t,tcase=1;
+	double x,y,c;
+	double hi,lo,mid,val;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%lf %lf %lf", &x, &y, &c);
+		lo=0;
+		hi=min(x,y);
+		while(fabs(hi-lo)>EPS){
+			mid=(hi+lo)/2.0;
+			val=fnc(x,y,mid);
+			if(val>c){
+				lo=mid;
+			}
+			if(val<c){
+				hi=mid;
+			}
+		}
+		printf("Case %d: %.8lf\n", tcase++, mid);
+	}
+	return 0;
+}

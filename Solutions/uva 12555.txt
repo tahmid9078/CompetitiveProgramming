@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int t,tc=1,tmp;
+	string s;
+	int a,b;
+	scanf("%d", &t);
+	while(t--){
+		cin>>a>>s;
+		if(s.length()>3){
+			b=(int)s[3]-'0';
+		}
+		else{
+			b=0;
+		}
+		cout<<"Case "<<tc++<<": "<<a*0.5+b*0.05<<endl;
+	}
+	return 0;
+}

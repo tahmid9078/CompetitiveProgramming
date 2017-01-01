@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int mat[105][105];
+	int n;
+	int rowSum, colSum,row,col;
+	int noOddRow, noOddCol;
+	while(true){
+		scanf("%d", &n);
+		if(n==0)break;
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				scanf("%d", &mat[i][j]);
+			}
+		}
+		noOddRow=0;
+		noOddCol=0;
+		for(int i=0; i<n; i++){
+			rowSum=0;
+			colSum=0;
+			for(int j=0; j<n; j++){
+				rowSum+=mat[i][j];
+				colSum+=mat[j][i];
+			}
+			if(rowSum%2!=0){
+				noOddRow++;
+				row=i;
+			}
+			if(colSum%2!=0){
+				noOddCol++;
+				col=i;
+			}
+		}
+		
+		if(noOddRow==0 && noOddCol==0){
+			printf("OK\n");
+		}
+		else if(noOddRow==1 && noOddCol==1){
+			printf("Change bit (%d,%d)\n",row+1,col+1);
+		}
+		else{
+			printf("Corrupt\n");
+		}
+	}
+	return 0;
+}

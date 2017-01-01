@@ -1,0 +1,73 @@
+    #include <stdio.h>
+    #include <algorithm>
+     
+    using namespace std;
+     
+    char ar[105][105];
+    int ans[105][105];
+    int main() {
+    	int n,m,cnt,tcase=1;
+    	bool flag=false;
+    	while(true){
+     
+    		scanf("%d %d", &n, &m);
+    		scanf("\n");
+    		if(n==0 && m==0) break;
+     
+    		for(int i=1; i<=n; i++){
+    			for(int j=1; j<=m; j++){
+    				scanf("%c", &ar[i][j]);
+    			}
+    			scanf("\n");
+    		}
+    		cnt=0;
+    		for(int i=1; i<=n; i++){
+    			for(int j=1; j<=m; j++){
+    				cnt=0;
+    				if(ar[i][j]=='*'){
+    					ans[i][j]=-12;
+    				}
+    				else{
+    					if(ar[i-1][j-1]=='*') cnt++;
+    					if(ar[i][j-1]=='*') cnt++;
+    					if(ar[i+1][j-1]=='*') cnt++;
+    					if(ar[i+1][j]=='*') cnt++;
+    					if(ar[i+1][j+1]=='*') cnt++;
+    					if(ar[i][j+1]=='*') cnt++;
+    					if(ar[i-1][j+1]=='*') cnt++;
+    					if(ar[i-1][j]=='*') cnt++;
+     
+    					ans[i][j]=cnt;
+    				}
+     
+    			}
+    		}
+    		if(flag==true) printf("\n");
+     
+    		flag=true;
+    		printf("Field #%d:\n", tcase++);
+    		for(int i=1; i<=n; i++){
+    			for(int j=1; j<=m; j++){
+     
+    				 if(ans[i][j]==-12){
+    				 	printf("*");
+    				 }
+    				else{
+    					printf("%d", ans[i][j]);
+    				}
+    			}
+    			printf("\n");
+    		}
+     
+     
+    		for(int i=1; i<=n; i++){
+    			for(int j=1; j<=m; j++){
+    				ans[i][j]=0;
+    				ar[i][j]='.';
+    			}
+     
+    		}
+    	}
+     
+    	return 0;
+    }

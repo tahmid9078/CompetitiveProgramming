@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int euclidEx(int a, int b,int &x ,int &y){
+	
+	if(a==0){
+		x=0;
+		y=1;
+		return b;
+	}
+	
+	int x1, y1;
+	int d=euclidEx(b%a,a,x1,y1);
+	
+	x=y1-(b/a)*x1;
+	y=x1;
+	return d;
+}
+
+int main() {
+	
+	int a, b;
+	int x,y;
+	
+	while(scanf("%d %d", &a, &b)==2){
+		
+		int d=euclidEx(a, b, x, y);
+		
+		if(x>y){
+			if((x*b+y*a)==d){
+				printf("%d %d %d\n", y , x, d);
+			}
+			else{
+				printf("%d %d %d\n", x , y, d);
+			}
+		}
+		else{
+			
+			printf("%d %d %d\n", x , y, d);
+		}
+	}
+	
+	return 0;
+}

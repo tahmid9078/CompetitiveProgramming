@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int n,tmp;
+	while(scanf("%d", &n) && n!=0){
+		priority_queue<int,vector<int>, greater<int> > pq;
+		while(n--){
+			scanf("%d", &tmp);
+			pq.push(tmp);
+		}
+		int ans=0;
+		int add=0;
+		while(pq.size()>1){
+			add=pq.top();
+			pq.pop();
+			add+=pq.top();
+			pq.pop();
+			ans+=add;
+			pq.push(add);
+		}
+		printf("%d\n",ans);
+	}
+	return 0;
+}

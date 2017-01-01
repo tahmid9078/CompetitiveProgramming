@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int main() {
+	
+	char str[31];
+	
+	while(scanf("%s", str)!=EOF){
+		
+	
+		
+		for(int i=0; i<strlen(str); i++){
+			
+			if(str[i]=='1' || str[i]=='0' || str[i]=='-'){
+				
+				printf("%c", str[i]);
+			}
+			else if(str[i]>='A' && str[i]<='C'){
+				
+				printf("%d", 2);
+			}
+			else if(str[i]>='D' && str[i]<='F'){
+				
+				printf("%d", 3);
+			}else if(str[i]>='G' && str[i]<='I'){
+				
+				printf("%d", 4);
+			}else if(str[i]>='J' && str[i]<='L'){
+				
+				printf("%d", 5);
+			}else if(str[i]>='M' && str[i]<='O'){
+				
+				printf("%d", 6);
+			}else if(str[i]>='P' && str[i]<='S'){
+				
+				printf("%d", 7);
+			}else if(str[i]>='T' && str[i]<='V'){
+				
+				printf("%d", 8);
+			}else if(str[i]>='W' && str[i]<='Z'){
+				
+				printf("%d", 9);
+			}
+		}
+		printf("\n");
+		
+		
+	}
+	return 0;
+}

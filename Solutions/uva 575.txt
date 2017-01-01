@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+ using namespace std;
+
+int main (){
+	string line;
+	long long num;
+	while(getline(cin, line)){
+		if(line=="0") break;
+		int len=line.length();
+		num=0;
+		for(int i=len-1, j=1; i>=0; i--,j++) {
+			if(line[i]=='2') num+=(2*(pow(2,j)-1));
+			if(line[i]=='1') num+=(pow(2,j)-1);
+		}
+		printf("%lld\n",num);
+	}
+    return 0;
+}

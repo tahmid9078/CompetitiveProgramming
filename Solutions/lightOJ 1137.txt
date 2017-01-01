@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define EPS 1e-10
+#define PI acos(-1.0)
+
+double fnc(double l, double thet){
+  double r = (l/2.0)/sin(thet);
+  return 2.0*r*thet;
+}
+
+int main() {
+	double l,n,c,s;
+	double val,lo,hi,mid,alpha,x,r;
+	int t,tcase=1;
+	scanf("%d", &t);
+	while(t--){
+		scanf("%lf %lf %lf", &l, &n, &c);
+		s=(1+n*c)*l;
+		lo=0;
+		hi=PI;
+		mid = 0;
+		while(fabs(hi-lo)>EPS){
+			mid=(hi+lo)/2.0;
+			val=fnc(l,mid);
+			if(val>s){
+				hi=mid;
+			}
+			else{
+				lo=mid;
+			}
+		}
+		alpha=mid/2;
+		x=(l/2)/tan(alpha);
+		r=s/mid;
+		printf("Case %d: %.8lf\n", tcase++, r-x);
+	}
+	return 0;
+}

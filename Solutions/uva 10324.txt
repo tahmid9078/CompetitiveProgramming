@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	char s[1000010];
+	int i, j, q, Max, Min,tmp1,tmp2,tcase=1;
+	while(scanf("%s",s)==1){
+		int len=strlen(s);
+		if(len==0) break;
+		scanf("%d", &q);
+		for(i=0; i<q; i++){
+			scanf("%d %d", &tmp1, &tmp2);
+			Min=min(tmp1,tmp2);
+			Max=max(tmp1,tmp2);
+			if(i==0) printf("Case %d:\n",tcase++);
+			for(j=Min ;j<Max; j++){
+				if(s[j]!=s[j+1]){
+					printf("No\n");
+					break;
+				}
+			}
+			if(j==Max) printf("Yes\n");
+		}
+	}
+	return 0;
+}

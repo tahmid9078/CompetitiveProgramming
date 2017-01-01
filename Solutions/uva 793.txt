@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define N 1000000
+int parent[N];
+int Rank[N];
+void create_set(int n){
+	for(int i=0; i<=n; i++){
+		parent[i]=i;
+		Rank[i]=0;
+	}
+}
+int find(int x){
+	if(x==parent[x]){
+		return x;
+	}
+	return parent[x]=find(parent[x]);
+}
+void Union(int x, int y){
+	int px=find(x);
+	int py=find(y);
+	if(Rank[px]>Rank[py]){
+		parent[py]=px;
+	}
+	else{
+		parent[px]=py;
+	}
+	if(Rank[px]==Rank[py]){
+		Rank[py]+=1;
+	} 
+}
+
+int main() {
+	int t;
+	int n, a,b,ok, notok;
+	char c;
+	bool blank=false;
+	scanf("%d", &t);
+ 
+	while(t--){
+		scanf("%d", &n);
+		create_set( n);
+		getchar();
+		ok=0;notok=0;
+		while((c=getchar()) && isalpha(c)){
+			scanf("%d %d", &a,&b);
+			getchar();
+			if(c=='c'){
+				Union(a,b);
+			}
+			else{
+				if(find(a)==find(b))ok++;
+				else notok++;
+			}
+		}
+		if(blank)printf("\n");
+		blank=true;
+		printf("%d,%d\n",ok,notok);
+	}
+	return 0;
+}

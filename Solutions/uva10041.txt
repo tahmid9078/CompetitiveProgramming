@@ -1,0 +1,33 @@
+    #include <stdio.h>
+    #include <algorithm>
+    using namespace std;
+     
+    int main() {
+     
+    	int t,n,m,minimum,tmp;
+    	int r[505];
+    	scanf("%d", &t);
+    	while(t--){
+    		m=-1;
+    		minimum=99999999;
+    		scanf("%d", &n);
+    		for(int i=0; i<n; i++){
+    			scanf("%d", &r[i]);
+    			if(r[i]>m){
+    				m=r[i];
+    			}
+    		}
+    		for(int i=1; i<=m; i++){
+    			tmp=0;
+    			for(int j=0; j<n; j++){
+    				tmp+=abs(i-r[j]);
+    			}
+    			if(tmp<minimum){
+    				minimum=tmp;
+    			}
+    		}
+    		printf("%d\n",minimum);
+     
+    	}
+    	return 0;
+    }
