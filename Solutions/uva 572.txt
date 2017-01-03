@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int dx[8]={0, 0, 1, -1, 1, -1, -1, 1};
+int dy[8]={1, -1, 0, 0, 1, 1, -1, -1};
+char graph[105][105];
+bool vis[105][105];
+int r,c;
+void init(){
+	for(int i=0; i<r; i++){
+		for(int j=0; j<c; j++){
+			graph[i][j]='*';
+			vis[i][j]=false;
+		}
+	}
+}
+
+int bfs(int a, int b){
+	queue<int> q;
+	q.push(a);
+	q.push(b);
+	vis[a][b]=true;
+	while(!q.empty()){
+		int x1=q.front(); q.pop();
+		int y1=q.front(); q.pop();
+		for(int i=0; i<8; i++){
+			int x=x1+dx[i];
+			int y=y1+dy[i];
+			if(x>=0 && x<r && y>=0 && y<c){
+				if(vis[x][y]==false && graph[x][y]=='@'){
+					vis[x][y]=true;
+					q.push(x);
+					q.push(y);
+				}
+			}
+		}
+	}
+}
+
+
+
+int main() {
+	
+	while(true){
+		scanf("%d %d", &r, &c);
+		getchar();
+		if(r==0 && c==0) break;
+		init();
+		for(int i=0; i<r; i++){
+			for(int j=0; j<c; j++){
+				scanf("%c", &graph[i][j]);
+			}
+			getchar();
+		}
+		int ans=0;
+		for(int i=0; i<r; i++){
+			for(int j=0; j<c; j++){
+				if(vis[i][j]==false && graph[i][j]=='@'){
+					bfs(i,j);
+					ans++;
+				}
+			}
+		}
+		printf("%d\n", ans);
+	}
+	return 0;
+}
