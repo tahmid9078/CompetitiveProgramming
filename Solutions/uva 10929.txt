@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	
+	string s;
+	while(cin>>s){
+		if(s=="0") break;
+		int slen=s.size();
+		int res=0;
+		for(int i=0; i<slen; i+=2){
+			res+=s[i]-'0';
+		}
+		for(int i=1; i<slen; i+=2){
+			res-=s[i]-'0';
+		}
+		if(res%11==0) cout<<s<<" is a multiple of 11.\n";
+		else cout<<s<<" is not a multiple of 11.\n";
+	}
+	return 0;
+}
